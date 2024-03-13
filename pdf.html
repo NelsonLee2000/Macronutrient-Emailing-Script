@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nutrition Sheet</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+        }
+        h1 {
+            text-align: center;
+        }
+        h2 {
+            margin-top: 60px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>{{ client_name }} Nutrition Plan Meso {{mesocycle}}: {{phase}}</h1>
+        <h2>Total Daily Nutrition</h2>
+        <table>
+            <tr>
+                <th>Daily Total Calories and Macronutrients</th>
+                <th>Total</th>
+            </tr>
+            <tr>
+                <td>Daily Calories (kcal)</td>
+                <td>{{ total_calories }}</td>
+            </tr>
+            <tr>
+                <td>Daily Protein (g)</td>
+                <td>{{ total_protein }}</td>
+            </tr>
+            <tr>
+                <td>Daily Fats (g)</td>
+                <td>{{ total_fats }}</td>
+            </tr>
+            <tr>
+                <td>Daily Carbohydrates (g)</td>
+                <td>{{ total_carbs }}</td>
+            </tr>
+        </table>
+
+        <h2>Macronutrients Per Meal</h2>
+        <table>
+            <tr>
+                <th>Meal</th>
+                <th>Protein (g)</th>
+                <th>Fats (g)</th>
+                <th>Carbohydrates (g)</th>
+            </tr>
+            <tr>
+                <td>Pre and Pose-Workout (2)</td>
+                <td>{{ pre_and_post_wo_meals["protein"] }}</td>
+                <td>{{ pre_and_post_wo_meals["fats"] }}</td>
+                <td>{{ pre_and_post_wo_meals["carbs"] }}</td>
+            </tr>
+            <tr>
+                <td>Regular (2)</td>
+                <td>{{ two_regular_meals["protein"] }}</td>
+                <td>{{ two_regular_meals["fats"] }}</td>
+                <td>{{ two_regular_meals["carbs"] }}</td>
+            </tr>
+        </table>
+        <h2></h2>
+    </div>
+</body>
+</html>
