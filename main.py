@@ -109,7 +109,7 @@ Nelson Lee
 
         #creating MIME object, defining parts of the email
         msg = MIMEMultipart()
-        msg["From"] = email_from
+        msg["From"] = f"Nelson Lee <{email_from}>"
         msg["To"] = email_to
         msg["Subject"] = subject
 
