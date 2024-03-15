@@ -1,4 +1,4 @@
-# Marco Calcalculator PDF Emailing Script
+# Marconutrient PDF Emailing Script
 
 This Python script calculates my coaching client's daily macronutrients (protein, fats, and carbohydrates), creates a pdf with the macronutrients split into 4 meals, stores the pdf in my client's file on my computer, and then emails the pdf to my client.
 
@@ -6,7 +6,7 @@ This Python script calculates my coaching client's daily macronutrients (protein
 
 As an online fitness coach, one of my tasks is to provide my clients with an updated nutrition sheet when we finish a cycle of training and dieting. For example, I may transition my client from a bulk to a cut, and this requires a change in their daily caloric intake. Usually this process is long and tedious, requiring me to insert inputs into my google sheets macrocalculator, copy the macronutrients per meal, make a new google document, paste in the macronutrients, format the google document, download the google document as a pdf, store it in the correct folder on my computer, and finally email it to my client. This process usually takes around 15 minutes.
 
-With this script, this process now only takes 5 seconds (99.4% quicker). After inputting a couple of variables, the script will calculate the marconutirients per meal, create a well-formatted pdf with the calculated numbers,organize this pdf to my client's file on my computer, and email this pdf to my client.
+With this script, this process now only takes 5 seconds (99.4% faster!). After inputting a couple of variables, the script will calculate the marconutirients per meal, create a well-formatted pdf with the calculated numbers,organize this pdf to my client's file on my computer, and email this pdf to my client.
 
 ## How does it work?
 
