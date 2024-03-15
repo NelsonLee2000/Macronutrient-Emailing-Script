@@ -126,7 +126,7 @@ Nelson Lee
         attachment_package = MIMEBase('application', 'octet-stream')
         attachment_package.set_payload((attachment).read())
         encoders.encode_base64(attachment_package)
-        attachment_package.add_header("Content-Disposition", "attachment; filename= " + attachment_filename)
+        attachment_package.add_header("Content-Disposition", "attachment; filename= " + output_filename)
         msg.attach(attachment_package)
 
         #set to string
