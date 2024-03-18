@@ -150,7 +150,7 @@ Nelson Lee
         finally:
             TIE_server.quit()
     else:
-        print("no problem, ending script")
+        print("PDF was not sent, ending script")
 
 except Exception as e:
     logging.exception(e)
