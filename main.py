@@ -18,7 +18,7 @@ try:
     total_calories = int(input("Enter Total Calories (kcal): "))
     total_protein = int(input("Enter Total Protein (g): "))
     fats_ratio = float(input("Enter Fats Ratio (0.3-0.4): "))
-    mesocycle = input("Enter Mesocycle #: ")
+    mesocycle = int(input("Enter Mesocycle #: "))
     phase = input("Enter Phase(Fat Loss, Massing, Maintenance, Deload): ")
     client_name = input("Enter Client Name (firstname  lastname): ")
 
