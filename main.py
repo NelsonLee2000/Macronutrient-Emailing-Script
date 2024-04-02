@@ -22,25 +22,36 @@ try:
     phase = input("Enter Phase(Fat Loss, Massing, Maintenance, Deload): ")
     client_name = input("Enter Client Name (firstname  lastname): ")
 
+    calories_per_gram_of_protein = 4
+    calories_per_gram_of_carbs = 4
+    calories_per_gram_of_fat = 9
+
     #calculations from inputs
     total_fats = round(bodyweight * fats_ratio)
-    total_carbs = round((total_calories - ((total_protein * 4) + (total_fats * 9)))/4)
-
+    total_carbs = round((total_calories - ((total_protein * calories_per_gram_of_protein) + (total_fats * calories_per_gram_of_fat))) / calories_per_gram_of_carbs)
 
     #Using total macros to split into 2 types of meals
+    meals_per_day = 4
+    pre_and_post_fat_ratio = 0.15
+    pre_and_post_carbs_ratio = 0.3
+
     pre_and_post_wo_meals = {
-        "protein" : round(total_protein/4),
-        "fats" : round(total_fats*0.15),
-        "carbs" : round(total_carbs*0.3)
+        "protein" : round(total_protein / meals_per_day),
+        "fats" : round(total_fats * pre_and_post_fat_ratio),
+        "carbs" : round(total_carbs * pre_and_post_carbs_ratio)
     }
 
+    num_pre_and_post_meals = 2
+    num_regular_meals = 2
+
     two_regular_meals = {
-        "protein": round(total_protein/4),
-        "fats": round((total_fats - 2*(pre_and_post_wo_meals["fats"]))/2),
-        "carbs": round((total_carbs - 2*(pre_and_post_wo_meals["carbs"]))/2)
+        "protein": round(total_protein / meals_per_day),
+        "fats": round((total_fats - num_pre_and_post_meals * (pre_and_post_wo_meals["fats"]))/num_regular_meals),
+        "carbs": round((total_carbs - num_pre_and_post_meals * (pre_and_post_wo_meals["carbs"]))/num_regular_meals)
     }
 
     #context is given to jinja 2 environment render
+    
     context = {
         "bodyweight" : bodyweight,
         "total_calories" : total_calories,
