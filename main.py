@@ -89,79 +89,82 @@ try:
 
     print(f"{output_filename} was successfully created in {output_directory}")
 
-    send_email_y_n = input("Send email with pdf? (y/n)")
+    while True:
+        send_email_y_n = input("Send email with pdf? (y/n)")
 
+        if send_email_y_n == "y":
+            #port number and server set-up
+            smtp_port = 587
+            smtp_server = "smtp.gmail.com"
 
+            email_from = "nelsonleex@gmail.com"
+            email_to = client_emails[client_name]
 
-    #start of email sending code
-    if send_email_y_n == "y":
+            pw = os.getenv("pw")
 
-        #port number and server set-up
-        smtp_port = 587
-        smtp_server = "smtp.gmail.com"
-
-        email_from = "nelsonleex@gmail.com"
-        email_to = client_emails[client_name]
-
-        pw = os.getenv("pw")
-
-        subject = f"Mesocycle {mesocycle} Nutrition Sheet "
-        
-        #body of the email
-        body = f"""
+            subject = f"Mesocycle {mesocycle} Nutrition Sheet "
+            
+            #body of the email
+            body = f"""
 Attached below is your nutrition sheet for mesocycle {mesocycle}
 
 
 Best,
 
 Nelson Lee
-        """
+            """
 
-        #creating MIME object, defining parts of the email
-        msg = MIMEMultipart()
-        msg["From"] = f"Nelson Lee <{email_from}>"
-        msg["To"] = email_to
-        msg["Subject"] = subject
+            #creating MIME object, defining parts of the email
+            msg = MIMEMultipart()
+            msg["From"] = f"Nelson Lee <{email_from}>"
+            msg["To"] = email_to
+            msg["Subject"] = subject
 
-        #attaching the body of the message
-        msg.attach(MIMEText(body, "plain"))
+            #attaching the body of the message
+            msg.attach(MIMEText(body, "plain"))
 
-        #define the file to attach
-        attachment_filename = output_path
+            #define the file to attach
+            attachment_filename = output_path
 
-        #open the file as binary (rb)
-        attachment = open(attachment_filename, "rb")
+            #open the file as binary (rb)
+            attachment = open(attachment_filename, "rb")
 
-        #encode as base 64
-        attachment_package = MIMEBase('application', 'octet-stream')
-        attachment_package.set_payload((attachment).read())
-        encoders.encode_base64(attachment_package)
-        attachment_package.add_header("Content-Disposition", "attachment; filename= " + output_filename)
-        msg.attach(attachment_package)
+            #encode as base 64
+            attachment_package = MIMEBase('application', 'octet-stream')
+            attachment_package.set_payload((attachment).read())
+            encoders.encode_base64(attachment_package)
+            attachment_package.add_header("Content-Disposition", "attachment; filename= " + output_filename)
+            msg.attach(attachment_package)
 
-        #set to string
-        text = msg.as_string()
+            #set to string
+            text = msg.as_string()
 
+            try:
+                #connecting to server
+                print("Trying to connect to server")
+                TIE_server = smtplib.SMTP(smtp_server, smtp_port)
+                TIE_server.starttls()
+                TIE_server.login(email_from, pw)
+                print("Login successful, connected to server")
+
+                #sending email
+                print(f"Sending email to: {email_to}")
+                TIE_server.sendmail(email_from, email_to, text)
+                print(f"Email successfully sent to: {email_to}")
+                print("email sent, ending script")
+            except Exception  as e:
+                print(str(e))
+            finally:
+                TIE_server.quit()
+                break
+    
+        elif send_email_y_n == "n":
+            print("PDF was not sent, ending script")
+            break
         
-        try:
-            #connecting to server
-            print("Trying to connect to server")
-            TIE_server = smtplib.SMTP(smtp_server, smtp_port)
-            TIE_server.starttls()
-            TIE_server.login(email_from, pw)
-            print("Login successful, connected to server")
-
-            #sending email
-            print(f"Sending email to: {email_to}")
-            TIE_server.sendmail(email_from, email_to, text)
-            print(f"Email successfully sent to: {email_to}")
-            print("email sent, ending script")
-        except Exception  as e:
-            print(str(e))
-        finally:
-            TIE_server.quit()
-    else:
-        print("PDF was not sent, ending script")
+        else:
+            print("INVALID: Please enter \"y\" or \"n\"")
+            print()
 
 except Exception as e:
     logging.exception(e)
